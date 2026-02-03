@@ -25,7 +25,7 @@
             text-align: center;
         }
 
-        p, .subtitle, .copyright, .info-text {
+        p, .subtitle, .copyright, .info-text, .tooltip-text {
             font-family: 'Courier Prime', monospace; 
             letter-spacing: 0.5px;
         }
@@ -48,20 +48,57 @@
             padding: 14px 35px; border-radius: 50px; text-decoration: none; 
             font-weight: 600; font-family: 'Poppins', sans-serif;
             box-shadow: 0 4px 15px rgba(0,136,204,0.3);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .main-btn i { color: white !important; }
         .main-btn:hover { background: #0077b5; transform: translateY(-3px); }
 
-        /* Style for the new Info section */
+        /* Enhanced Tooltip Container */
         .info-box {
-            display: flex;
+            position: relative;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            cursor: pointer;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .info-box .tooltip-text {
+            visibility: hidden;
+            width: 240px;
+            background-color: #00aaff;
+            color: #fff;
+            text-align: left; /* Changed to left for a list-like feel */
+            border-radius: 12px;
+            padding: 15px;
+            position: absolute;
+            z-index: 10;
+            bottom: 160%;
+            left: 50%;
+            margin-left: -120px;
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-size: 0.8rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            line-height: 1.4;
+        }
+
+        .info-box .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: #00aaff transparent transparent transparent;
+        }
+
+        .info-box:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
 
         .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
@@ -96,6 +133,11 @@
             <div class="info-box">
                 <i class="fas fa-info-circle"></i>
                 <span class="info-text">info</span>
+                <span class="tooltip-text">
+                    📍 Location: Addis Ababa, Ethiopia <br><br>
+                    🚀 Focus: Web Development & UI Design <br><br>
+                    💬 Chat: Feel free to reach out for collabs!
+                </span>
             </div>
         </div>
     </div>
