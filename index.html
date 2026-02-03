@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | Ultimate Digital Space</title>
+    <title>Affan | Digital Islamic Space</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
@@ -18,7 +18,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* FAST NAVIGATION & THEME */
+        /* NAVIGATION */
         .theme-toggle, .menu-btn { position: fixed; top: 15px; z-index: 1001; background: var(--card); border: 1px solid var(--accent); padding: 8px 12px; border-radius: 8px; cursor: pointer; color: var(--accent); }
         .theme-toggle { right: 15px; }
         .menu-btn { left: 15px; }
@@ -26,32 +26,36 @@
         .reveal { opacity: 0; transform: translateY(15px); transition: 0.4s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* HEADER SECTION */
+        /* HEADER */
         .top-section { padding: 80px 20px 20px; text-align: center; }
         .greeting { font-family: 'Courier Prime'; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
-        .profile-img { width: 95px; height: 95px; border-radius: 50%; border: 2px solid var(--accent); margin: 10px 0; }
+        .profile-img { width: 90px; height: 90px; border-radius: 50%; border: 2px solid var(--accent); margin: 10px 0; }
         h1 { font-size: 2rem; letter-spacing: 3px; }
-        
         .btn-mini { display: inline-flex; align-items: center; gap: 6px; background: var(--gradient); color: white !important; padding: 7px 18px; border-radius: 50px; text-decoration: none; font-size: 0.8rem; font-weight: 600; margin: 5px; }
 
-        /* MAIN CONTAINER */
-        .container { max-width: 480px; margin: 0 auto 60px; padding: 0 15px; }
-        .card { background: var(--card); padding: 20px; border-radius: 18px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.03); }
+        .container { max-width: 480px; margin: 0 auto 20px; padding: 0 15px; }
+        .card { background: var(--card); padding: 20px; border-radius: 18px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
         
-        /* TASBEEH UI */
-        .arabic-text { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--accent); margin-bottom: 5px; height: 45px; }
+        /* TASBEEH */
+        .arabic-text { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--accent); height: 45px; }
         .phrase-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: #fff; padding: 5px 10px; border-radius: 6px; cursor: pointer; margin: 2px; font-size: 0.7rem; }
         .phrase-btn.active { background: var(--accent); color: #000; font-weight: bold; }
-        .count-num { font-size: 3rem; font-family: 'Courier Prime'; margin: 10px 0; color: #fff; }
-        .tap-btn { width: 65px; height: 65px; border-radius: 50%; background: var(--gradient); border: none; color: #fff; cursor: pointer; font-size: 1.5rem; }
+        .count-num { font-size: 3rem; font-family: 'Courier Prime'; margin: 5px 0; }
+        .tap-btn { width: 60px; height: 60px; border-radius: 50%; background: var(--gradient); border: none; color: #fff; cursor: pointer; font-size: 1.4rem; position: relative; z-index: 2; }
 
-        /* STATUS & CLOCK */
+        /* MOSQUE ANIMATION BACKGROUND */
+        .mosque-bg { position: absolute; bottom: -10px; right: -10px; font-size: 80px; color: var(--accent); opacity: 0.1; transform: rotate(-15deg); pointer-events: none; animation: float 6s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-10px) rotate(-10deg); } }
+
+        /* QURAN/SEARCH UI */
+        select, input { width: 100%; background: #000; color: #fff; border: 1px solid var(--accent); padding: 12px; border-radius: 12px; font-size: 0.85rem; outline: none; margin-top: 10px; position: relative; z-index: 2; }
+        
         .status-bar { text-align: center; border-bottom: 1px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
         #live-clock { font-size: 1.6rem; font-family: 'Courier Prime'; color: var(--accent); }
 
-        select, input { width: 100%; background: #000; color: #fff; border: 1px solid var(--accent); padding: 12px; border-radius: 12px; font-size: 0.85rem; outline: none; margin-top: 10px; }
-        
-        /* SIDEBAR */
+        /* FOOTER */
+        footer { text-align: center; padding: 30px 10px; opacity: 0.5; font-size: 11px; font-family: 'Courier Prime'; letter-spacing: 1px; }
+
         .sidebar { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background: #050510; z-index: 1000; transition: 0.3s; padding-top: 60px; }
         .sidebar a { padding: 15px 25px; text-decoration: none; color: #eee; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); }
     </style>
@@ -63,7 +67,6 @@
 
     <div class="sidebar" id="sidebar">
         <a href="#"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="javascript:void(0)" onclick="openQuotes()"><i class="fas fa-star"></i> Wisdom Vault</a>
         <a href="https://t.me/affan_4"><i class="fab fa-telegram"></i> Telegram Contact</a>
     </div>
 
@@ -71,17 +74,14 @@
         <div class="greeting" id="auto-greeting">...</div>
         <img src="me.png" alt="Affan" class="profile-img">
         <h1>AFFAN</h1>
-        <div>
-            <a href="https://t.me/affan_4" class="btn-mini"><i class="fab fa-telegram"></i> CONTACT</a>
-            <a href="javascript:void(0)" onclick="openQuotes()" class="btn-mini"><i class="fas fa-bolt"></i> QUOTES</a>
-        </div>
+        <div><a href="https://t.me/affan_4" class="btn-mini"><i class="fab fa-telegram"></i> CONTACT</a></div>
     </div>
 
     <div class="container">
         <div class="status-bar reveal">
             <div id="live-clock">00:00:00</div>
             <div id="live-date" style="font-size: 0.7rem; opacity: 0.6;">...</div>
-            <div style="font-size: 0.6rem; margin-top: 5px;">Visitors: <span id="visit-count" style="color:var(--accent)">1,702</span></div>
+            <div style="font-size: 0.6rem; margin-top: 5px;">Active Visitors: <span id="visit-count" style="color:var(--accent)">1,708</span></div>
         </div>
 
         <div class="card reveal" style="text-align: center;">
@@ -94,39 +94,48 @@
                 <button class="phrase-btn" onclick="switchMode('tahlil', this)">Tahlil</button>
             </div>
             <button class="tap-btn" onclick="handleTap()"><i class="fas fa-plus"></i></button>
-            <p onclick="resetCurrent()" style="font-size: 9px; margin-top: 10px; cursor: pointer; opacity: 0.4; text-decoration: underline;">RESET CURRENT</p>
+            <p onclick="resetCurrent()" style="font-size: 9px; margin-top: 10px; cursor: pointer; opacity: 0.4;">RESET</p>
         </div>
 
         <div class="card reveal">
-            <h2 style="font-size: 0.9rem; color: var(--accent);"><i class="fas fa-play-circle"></i> QURAN VIBE</h2>
+            <h2 style="font-size: 0.9rem; color: var(--accent);"><i class="fas fa-quran"></i> QURAN LIBRARY</h2>
             <select id="qari-select" onchange="updatePlayer()">
-                <option value="afs">Mishary Rashid Alafasy</option>
+                <option value="afs">Mishary Rashid</option>
                 <option value="ghm">Saad Al-Ghamdi</option>
+                <option value="trg">Sudais</option>
+                <option value="maher">Maher Al-Muaiqly</option>
+                <option value="basit">Abdul Basit</option>
             </select>
-            <select id="surah-select" onchange="updatePlayer()">
-                <option value="001">Surah Al-Fatiha</option>
-                <option value="018">Surah Al-Kahf</option>
-                <option value="036">Surah Yaseen</option>
-                <option value="067">Surah Al-Mulk</option>
-            </select>
+            <select id="surah-select" onchange="updatePlayer()"></select>
             <div style="text-align: center; margin-top: 15px;">
-                <button class="tap-btn" style="width:45px; height:45px; font-size:1rem;" onclick="playPause()"><i id="q-icon" class="fas fa-play"></i></button>
+                <button class="tap-btn" style="width:50px; height:50px; font-size:1.1rem;" onclick="playPause()"><i id="q-icon" class="fas fa-play"></i></button>
             </div>
             <audio id="q-audio"></audio>
         </div>
 
-        <input type="text" id="h-input" class="reveal" placeholder="Search Hadith..." onkeydown="if(event.key==='Enter') runSearch()">
+        <div class="card reveal">
+            <i class="fas fa-mosque mosque-bg"></i>
+            <h2 style="font-size: 0.9rem; color: var(--accent);"><i class="fas fa-search"></i> HADITH SEARCH</h2>
+            <input type="text" id="h-input" placeholder="Search Prophet's Wisdom..." onkeydown="if(event.key==='Enter') runSearch()">
+        </div>
     </div>
 
+    <footer>
+        © 2026 AFFAN | ALL RIGHTS RESERVED<br>
+        <span style="font-size: 8px;">DIGITAL ISLAMIC SPACE V4.0</span>
+    </footer>
+
     <script>
-        // --- DATA & MEMORY ---
+        // SURAH GENERATOR
+        const surahNames = ["Al-Fatiha","Al-Baqarah","Al-Imran","An-Nisa","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Ta-Ha","Al-Anbiya","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara","An-Naml","Al-Qasas","Al-Ankabut","Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadilah","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Nazi'at","Abasa","At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-Adiyat","Al-Qari'ah","At-Takathur","Al-Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"];
+        const sSelect = document.getElementById('surah-select');
+        surahNames.forEach((n, i) => { let o = document.createElement('option'); o.value = (i + 1).toString().padStart(3, '0'); o.innerHTML = `${i + 1}. ${n}`; sSelect.appendChild(o); });
+
+        // MEMORY & TASBEEH
         let mode = 'tasbeeh';
         let data = JSON.parse(localStorage.getItem('affan_counts')) || { tasbeeh: 0, tahmid: 0, takbir: 0, tahlil: 0 };
         const text = { tasbeeh: "سُبْحَانَ اللهِ", tahmid: "الْحَمْدُ لِلَّهِ", takbir: "اللهُ أَكْبَرُ", tahlil: "لَا إِلٰهَ إِلَّا اللهُ" };
 
-        function save() { localStorage.setItem('affan_counts', JSON.stringify(data)); }
-
-        // --- TASBEEH LOGIC ---
         function switchMode(m, btn) {
             mode = m;
             document.getElementById('arabic-display').innerText = text[m];
@@ -138,37 +147,21 @@
         function handleTap() {
             data[mode]++;
             document.getElementById('t-count').innerText = data[mode].toString().padStart(2, '0');
-            save();
+            localStorage.setItem('affan_counts', JSON.stringify(data));
             if(navigator.vibrate) navigator.vibrate(40);
         }
 
-        function resetCurrent() { data[mode] = 0; document.getElementById('t-count').innerText = "00"; save(); }
+        function resetCurrent() { data[mode] = 0; document.getElementById('t-count').innerText = "00"; localStorage.setItem('affan_counts', JSON.stringify(data)); }
 
-        // --- THEME & UI ---
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('affan_theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        }
+        // AUDIO
+        const audio = document.getElementById('q-audio');
+        function updatePlayer() { audio.src = `https://server8.mp3quran.net/${document.getElementById('qari-select').value}/${document.getElementById('surah-select').value}.mp3`; if(!audio.paused) audio.play(); }
+        function playPause() { if(!audio.src) updatePlayer(); const i = document.getElementById('q-icon'); if(audio.paused) { audio.play(); i.className = 'fas fa-pause'; } else { audio.pause(); i.className = 'fas fa-play'; } }
 
-        // LOAD SAVED THEME
+        // SYSTEM
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); localStorage.setItem('affan_theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); document.getElementById('theme-icon').className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon'; }
         if(localStorage.getItem('affan_theme') === 'dark') toggleTheme();
 
-        // --- QURAN PLAYER ---
-        const audio = document.getElementById('q-audio');
-        function updatePlayer() {
-            audio.src = `https://server8.mp3quran.net/${document.getElementById('qari-select').value}/${document.getElementById('surah-select').value}.mp3`;
-            if(!audio.paused) audio.play();
-        }
-        function playPause() {
-            if(!audio.src) updatePlayer();
-            const icon = document.getElementById('q-icon');
-            if(audio.paused) { audio.play(); icon.className = 'fas fa-pause'; }
-            else { audio.pause(); icon.className = 'fas fa-play'; }
-        }
-
-        // --- TIME & SYSTEM ---
         function runClock() {
             const now = new Date();
             document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
@@ -178,13 +171,10 @@
             document.getElementById('auto-greeting').innerText = h < 12 ? "GOOD MORNING" : h < 18 ? "GOOD AFTERNOON" : "GOOD EVENING";
         }
         setInterval(runClock, 1000); runClock();
-
         function reveal() { document.querySelectorAll(".reveal").forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight - 20) r.classList.add("active"); }); }
         window.addEventListener("scroll", reveal); window.onload = reveal;
-        function toggleSidebar() { var s = document.getElementById("sidebar"); s.style.left = s.style.left === "0px" ? "-260px" : "0px"; }
+        function toggleSidebar() { var s = document.getElementById("sidebar"); s.style.left = s.style.left === "0px" ? "-280px" : "0px"; }
         function runSearch() { const q = document.getElementById('h-input').value; if(q) window.open('https://sunnah.com/search?q=' + encodeURIComponent(q), '_blank'); }
-
-        // Initialize display
         document.getElementById('t-count').innerText = data[mode].toString().padStart(2, '0');
     </script>
 </body>
