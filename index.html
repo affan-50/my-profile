@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | The Infinite Oasis</title>
+    <title>Affan | The Infinite Oasis (Fully Conserved)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
@@ -18,7 +18,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* NAV & THEME */
+        /* UI CONTROLS */
         .theme-toggle, .menu-btn { position: fixed; top: 15px; z-index: 1001; background: var(--card); border: 1px solid var(--accent); padding: 8px 12px; border-radius: 8px; cursor: pointer; color: var(--accent); }
         .theme-toggle { right: 15px; }
         .menu-btn { left: 15px; }
@@ -28,6 +28,7 @@
 
         /* HEADER */
         .top-section { padding: 80px 20px 10px; text-align: center; }
+        .greeting { font-family: 'Courier Prime'; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
         .profile-img { width: 85px; height: 85px; border-radius: 50%; border: 2px solid var(--accent); margin: 10px 0; }
         h1 { letter-spacing: 3px; font-size: 2rem; }
         .btn-mini { background: var(--gradient); color: white; border: none; padding: 8px 15px; border-radius: 50px; font-size: 0.75rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin: 3px; }
@@ -35,23 +36,26 @@
         .container { max-width: 480px; margin: 0 auto; padding: 0 15px 40px; }
         .card { background: var(--card); padding: 20px; border-radius: 18px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.03); position: relative; overflow: hidden; }
 
+        /* STATUS BAR */
+        .status-bar { text-align: center; border-bottom: 1px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
+        #live-clock { font-size: 1.6rem; font-family: 'Courier Prime'; color: var(--accent); }
+
         /* TASBEEH */
+        .arabic-text { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--accent); height: 40px; }
+        .phrase-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: #fff; padding: 5px 10px; border-radius: 6px; cursor: pointer; margin: 2px; font-size: 0.65rem; }
+        .phrase-btn.active { background: var(--accent); color: #000; font-weight: bold; }
         .count-num { font-size: 3rem; font-family: 'Courier Prime'; }
         .tap-btn { width: 60px; height: 60px; border-radius: 50%; background: var(--gradient); border: none; color: #fff; cursor: pointer; font-size: 1.4rem; z-index: 2; position: relative; }
-        .phrase-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: #fff; padding: 4px 8px; border-radius: 6px; cursor: pointer; margin: 2px; font-size: 0.65rem; }
-        .phrase-btn.active { background: var(--accent); color: #000; font-weight: bold; }
 
-        /* DIARY & INPUTS */
+        /* INPUTS & DIARY */
         textarea, input, select { width: 100%; background: #000; color: #fff; border: 1px solid var(--accent); padding: 12px; border-radius: 12px; font-size: 0.85rem; outline: none; margin-top: 10px; font-family: inherit; }
-        textarea { height: 100px; resize: none; border-style: dashed; }
-        .diary-entry { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.8rem; border-left: 2px solid var(--accent); position: relative; }
-        .del-btn { position: absolute; top: 5px; right: 5px; color: #ff5252; cursor: pointer; font-size: 0.7rem; }
+        .diary-entry { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 0.8rem; border-left: 2px solid var(--accent); position: relative; text-align: left; }
 
         /* ANIMATION */
         .mosque-bg { position: absolute; bottom: -10px; right: -10px; font-size: 80px; color: var(--accent); opacity: 0.1; transform: rotate(-15deg); pointer-events: none; animation: float 6s infinite ease-in-out; }
         @keyframes float { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-10px) rotate(-10deg); } }
 
-        footer { text-align: center; padding: 20px; opacity: 0.4; font-size: 10px; font-family: 'Courier Prime'; }
+        footer { text-align: center; padding: 20px; opacity: 0.4; font-size: 10px; font-family: 'Courier Prime'; letter-spacing: 1px; }
         .sidebar { position: fixed; top: 0; left: -260px; width: 260px; height: 100%; background: #050510; z-index: 1000; transition: 0.3s; padding-top: 60px; }
         .sidebar a { padding: 15px 25px; text-decoration: none; color: #eee; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); }
     </style>
@@ -68,19 +72,26 @@
     </div>
 
     <div class="top-section">
-        <div id="ramadan-timer" style="font-size: 10px; color: var(--accent); letter-spacing: 1px;">RAMADAN LOADING...</div>
+        <div class="greeting" id="auto-greeting">LOADING...</div>
         <img src="me.png" class="profile-img">
         <h1>AFFAN</h1>
         <div style="margin-top: 10px;">
-            <a href="https://www.youtube.com/live/uA7BvFpI_4Q" target="_blank" class="btn-mini"><i class="fas fa-kaaba"></i> LIVE</a>
-            <button class="btn-mini" onclick="shareSite()"><i class="fas fa-share-alt"></i> SHARE</button>
+            <a href="https://www.youtube.com/live/uA7BvFpI_4Q" target="_blank" class="btn-mini"><i class="fas fa-kaaba"></i> MAKKAH LIVE</a>
+            <a href="https://t.me/affan_4" class="btn-mini"><i class="fab fa-telegram"></i> CONTACT</a>
         </div>
     </div>
 
     <div class="container">
+        <div class="status-bar reveal">
+            <div id="live-clock">00:00:00</div>
+            <div id="live-date" style="font-size: 0.7rem; opacity: 0.6;">...</div>
+            <div style="font-size: 0.6rem; margin-top: 5px;">Active Visitors: <span id="visit-count" style="color:var(--accent)">1,705</span></div>
+            <div id="ramadan-countdown" style="font-size: 0.6rem; color: var(--accent); margin-top: 3px;">...</div>
+        </div>
+
         <div class="card reveal" style="text-align: center;">
-            <div id="arabic-display" style="font-family:'Amiri'; font-size: 1.5rem; color:var(--accent);">سُبْحَانَ اللهِ</div>
-            <div id="t-count" style="font-size: 3rem; font-family:'Courier Prime';">00</div>
+            <div class="arabic-text" id="arabic-display">سُبْحَانَ اللهِ</div>
+            <div class="count-num" id="t-count">00</div>
             <div style="margin-bottom: 10px;">
                 <button class="phrase-btn active" onclick="switchMode('tasbeeh', this)">Tasbeeh</button>
                 <button class="phrase-btn" onclick="switchMode('tahmid', this)">Tahmid</button>
@@ -88,99 +99,107 @@
                 <button class="phrase-btn" onclick="switchMode('tahlil', this)">Tahlil</button>
             </div>
             <button class="tap-btn" onclick="handleTap()"><i class="fas fa-plus"></i></button>
+            <p onclick="resetCount()" style="font-size: 8px; margin-top: 10px; opacity: 0.4; cursor:pointer;">RESET CURRENT</p>
         </div>
 
         <div class="card reveal">
-            <h2 style="font-size: 0.8rem;"><i class="fas fa-pen-nib"></i> PERSONAL REFLECTIONS</h2>
-            <textarea id="diary-input" placeholder="What's on your heart today, Affan?"></textarea>
-            <button class="btn-mini" style="width:100%; margin-top:5px; justify-content:center;" onclick="saveNote()">SAVE REFLECTION</button>
-            <div id="diary-list"></div>
+            <h2 style="font-size: 0.8rem; margin-bottom: 10px;"><i class="fas fa-clock"></i> PRAYER & ZAKAT</h2>
+            <div id="prayer-display" style="font-size: 0.75rem; line-height: 1.6; opacity: 0.8;">Detecting Location...</div>
+            <input type="number" id="wealth" placeholder="Zakat Calc: Enter Wealth" oninput="calcZakat()">
+            <div id="zakat-res" style="font-size: 0.7rem; color: var(--accent); margin-top: 5px;">Due: 0.00</div>
         </div>
 
         <div class="card reveal">
-            <h2 style="font-size: 0.8rem;"><i class="fas fa-clock"></i> PRAYER TIMES</h2>
-            <div id="prayer-times" style="font-size: 0.8rem; margin-top:10px;">Loading location...</div>
-            <button class="btn-mini" style="width:100%; margin-top:10px; justify-content:center;" onclick="getLocation()">REFRESH</button>
-        </div>
-
-        <div class="card reveal">
-            <i class="fas fa-mosque mosque-bg"></i>
-            <h2 style="font-size: 0.8rem;"><i class="fas fa-quran"></i> QURAN PLAYER</h2>
+            <h2 style="font-size: 0.8rem;"><i class="fas fa-quran"></i> QURAN LIBRARY</h2>
+            <select id="qari-select" onchange="updateAudio()">
+                <option value="afs">Mishary Rashid</option>
+                <option value="ghm">Saad Al-Ghamdi</option>
+                <option value="trg">Abdur-Rahman As-Sudais</option>
+                <option value="maher">Maher Al-Muaiqly</option>
+                <option value="basit">Abdul Basit</option>
+            </select>
             <select id="surah-select" onchange="updateAudio()"></select>
             <div style="text-align: center; margin-top: 15px;">
                 <button class="tap-btn" style="width:45px; height:45px; font-size:1rem;" onclick="toggleAudio()"><i id="q-icon" class="fas fa-play"></i></button>
             </div>
             <audio id="q-audio"></audio>
         </div>
+
+        <div class="card reveal">
+            <i class="fas fa-mosque mosque-bg"></i>
+            <h2 style="font-size: 0.8rem;"><i class="fas fa-search"></i> HADITH SEARCH</h2>
+            <input type="text" id="h-input" placeholder="Search Prophet's Wisdom..." onkeydown="if(event.key==='Enter') runSearch()">
+        </div>
+
+        <div class="card reveal">
+            <h2 style="font-size: 0.8rem;"><i class="fas fa-pen-nib"></i> PERSONAL DIARY</h2>
+            <textarea id="diary-input" placeholder="Write your reflection..."></textarea>
+            <button class="btn-mini" style="width:100%; margin-top:5px; justify-content:center;" onclick="saveNote()">SAVE NOTE</button>
+            <div id="diary-list"></div>
+        </div>
     </div>
 
     <footer>© 2026 AFFAN | ALL THINGS CONSERVED</footer>
 
     <script>
-        // --- DATA SYSTEM ---
-        let db = JSON.parse(localStorage.getItem('affan_master')) || {
+        // --- DATA & MEMORY ---
+        let db = JSON.parse(localStorage.getItem('affan_ultra')) || {
             counts: { tasbeeh: 0, tahmid: 0, takbir: 0, tahlil: 0 },
-            notes: [],
-            theme: 'light'
+            notes: [], theme: 'light'
         };
         let mode = 'tasbeeh';
         const texts = { tasbeeh: "سُبْحَانَ اللهِ", tahmid: "الْحَمْدُ لِلَّهِ", takbir: "اللهُ أَكْبَرُ", tahlil: "لَا إِلٰهَ إِلَّا اللهُ" };
 
-        function save() { localStorage.setItem('affan_master', JSON.stringify(db)); }
+        function save() { localStorage.setItem('affan_ultra', JSON.stringify(db)); }
+
+        // --- CLOCK & GREETING ---
+        function runClock() {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
+            const hj = new Intl.DateTimeFormat('en-u-ca-islamic-uma-nu-latn', {day:'numeric', month:'short', year:'numeric'}).format(now);
+            document.getElementById('live-date').innerText = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) + " | " + hj;
+            const h = now.getHours();
+            document.getElementById('auto-greeting').innerText = h < 12 ? "GOOD MORNING" : h < 18 ? "GOOD AFTERNOON" : "GOOD EVENING";
+            
+            const rDay = Math.floor((new Date("March 10, 2026") - now) / 86400000);
+            document.getElementById('ramadan-countdown').innerText = rDay + " DAYS UNTIL RAMADAN 🌙";
+        }
+        setInterval(runClock, 1000);
 
         // --- TASBEEH ---
         function switchMode(m, b) { mode = m; document.getElementById('arabic-display').innerText = texts[m]; document.getElementById('t-count').innerText = db.counts[m].toString().padStart(2,'0'); document.querySelectorAll('.phrase-btn').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
         function handleTap() { db.counts[mode]++; document.getElementById('t-count').innerText = db.counts[mode].toString().padStart(2,'0'); save(); if(navigator.vibrate) navigator.vibrate(40); }
-
-        // --- DIARY ---
-        function saveNote() {
-            const input = document.getElementById('diary-input');
-            if(!input.value) return;
-            const note = { text: input.value, date: new Date().toLocaleDateString() };
-            db.notes.unshift(note);
-            input.value = '';
-            save(); renderNotes();
-        }
-        function renderNotes() {
-            const list = document.getElementById('diary-list');
-            list.innerHTML = db.notes.map((n, i) => `
-                <div class="diary-entry">
-                    <span class="del-btn" onclick="deleteNote(${i})">DELETE</span>
-                    <div style="font-size: 0.6rem; opacity: 0.5;">${n.date}</div>
-                    <div>${n.text}</div>
-                </div>
-            `).join('');
-        }
-        function deleteNote(i) { db.notes.splice(i, 1); save(); renderNotes(); }
+        function resetCount() { db.counts[mode] = 0; document.getElementById('t-count').innerText = "00"; save(); }
 
         // --- QURAN ---
         const surahs = ["Al-Fatiha","Al-Baqarah","Al-Imran","An-Nisa","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Ta-Ha","Al-Anbiya","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara","An-Naml","Al-Qasas","Al-Ankabut","Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadilah","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Nazi'at","Abasa","At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-Adiyat","Al-Qari'ah","At-Takathur","Al-Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"];
         const sSel = document.getElementById('surah-select');
         surahs.forEach((n, i) => { let o = document.createElement('option'); o.value = (i+1).toString().padStart(3,'0'); o.innerHTML = `${i+1}. ${n}`; sSel.appendChild(o); });
         const audio = document.getElementById('q-audio');
-        function updateAudio() { audio.src = `https://server8.mp3quran.net/afs/${document.getElementById('surah-select').value}.mp3`; if(!audio.paused) audio.play(); }
+        function updateAudio() { audio.src = `https://server8.mp3quran.net/${document.getElementById('qari-select').value}/${document.getElementById('surah-select').value}.mp3`; if(!audio.paused) audio.play(); }
         function toggleAudio() { if(!audio.src) updateAudio(); const i = document.getElementById('q-icon'); if(audio.paused) { audio.play(); i.className='fas fa-pause'; } else { audio.pause(); i.className='fas fa-play'; } }
 
-        // --- UTILS ---
-        function getLocation() {
-            navigator.geolocation.getCurrentPosition(async (p) => {
-                const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}&method=2`);
-                const j = await res.json();
-                const t = j.data.timings;
-                document.getElementById('prayer-times').innerHTML = `Fajr: ${t.Fajr} | Dhuhr: ${t.Dhuhr} | Asr: ${t.Asr} | Maghrib: ${t.Maghrib} | Isha: ${t.Isha}`;
-            });
-        }
-        function updateRamadan() {
-            const days = Math.floor((new Date("March 10, 2026") - new Date()) / (1000*60*60*24));
-            document.getElementById('ramadan-timer').innerText = days + " DAYS UNTIL RAMADAN 🌙";
-        }
+        // --- TOOLS ---
+        function runSearch() { const q = document.getElementById('h-input').value; if(q) window.open('https://sunnah.com/search?q=' + encodeURIComponent(q), '_blank'); }
+        function calcZakat() { const w = document.getElementById('wealth').value; document.getElementById('zakat-res').innerText = `Due: ${(w * 0.025).toFixed(2)}`; }
+        function getLocation() { navigator.geolocation.getCurrentPosition(async (p) => {
+            const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}&method=2`);
+            const j = await res.json(); const t = j.data.timings;
+            document.getElementById('prayer-display').innerHTML = `Fajr: ${t.Fajr} | Dhuhr: ${t.Dhuhr} | Asr: ${t.Asr}<br>Maghrib: ${t.Maghrib} | Isha: ${t.Isha}`;
+        }); }
+
+        // --- DIARY ---
+        function saveNote() { const val = document.getElementById('diary-input').value; if(!val) return; db.notes.unshift({text: val, date: new Date().toLocaleDateString()}); document.getElementById('diary-input').value=''; save(); renderNotes(); }
+        function renderNotes() { document.getElementById('diary-list').innerHTML = db.notes.map((n, i) => `<div class="diary-entry"><span style="font-size:0.5rem; opacity:0.5">${n.date}</span><br>${n.text}</div>`).join(''); }
+
+        // --- SYSTEM ---
         function toggleTheme() { document.body.classList.toggle('dark-mode'); db.theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light'; save(); }
-        function toggleSidebar() { var s = document.getElementById("sidebar"); s.style.left = s.style.left === "0px" ? "-260px" : "0px"; }
+        function toggleSidebar() { var s = document.getElementById("sidebar"); s.style.left = s.style.left === "0px" ? "-280px" : "0px"; }
         function shareSite() { window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=Affan Digital Oasis 🌙`); }
 
         window.onload = () => { 
             if(db.theme === 'dark') document.body.classList.add('dark-mode');
-            renderNotes(); getLocation(); updateRamadan();
+            renderNotes(); getLocation(); runClock();
             document.getElementById('t-count').innerText = db.counts[mode].toString().padStart(2,'0');
             document.querySelectorAll('.reveal').forEach(r => r.classList.add('active'));
         };
