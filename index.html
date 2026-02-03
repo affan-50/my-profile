@@ -9,10 +9,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
 
         :root { 
-            --bg: #1a1a3a; /* Deep blue background */
+            --bg: #1a1a3a; 
             --text: #ffffff; 
             --card: rgba(255, 255, 255, 0.1); 
-            /* Gradient colors from your image */
             --gradient: linear-gradient(90deg, #0d4b5f 0%, #00c853 100%);
             --accent-green: #00c853; 
             --sidebar-bg: #0d0d26;
@@ -24,64 +23,83 @@
         /* --- SIDEBAR --- */
         .menu-btn {
             position: fixed; top: 20px; left: 20px;
-            font-size: 24px; color: var(--accent-green); /* Using your green */
+            font-size: 24px; color: var(--accent-green);
             cursor: pointer; z-index: 1001;
             background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
         }
 
         .sidebar {
-            position: fixed; top: 0; left: -250px; width: 250px; height: 100%;
-            background: var(--sidebar-bg); padding-top: 80px; transition: 0.5s; z-index: 1000;
+            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
+            background: var(--sidebar-bg); padding-top: 60px; transition: 0.5s cubic-bezier(0.77,0,0.175,1); z-index: 1000;
+        }
+
+        .close-sidebar {
+            position: absolute; top: 20px; right: 20px;
+            font-size: 22px; color: var(--accent-green); cursor: pointer;
         }
 
         .sidebar a {
-            padding: 15px 25px; text-decoration: none; font-size: 16px;
+            padding: 15px 30px; text-decoration: none; font-size: 16px;
             color: #e0e0e0; display: block; font-family: 'Poppins', sans-serif;
         }
+        .sidebar a i { margin-right: 15px; color: var(--accent-green); width: 20px; }
+        .sidebar a:hover { background: rgba(0, 200, 83, 0.1); color: white; }
 
-        /* Sidebar Icons Color */
-        .sidebar a i { margin-right: 15px; color: var(--accent-green); }
-        .sidebar a:hover { background: rgba(255,255,255,0.05); color: white; }
-
-        /* --- BUTTONS (Using the Image Gradient) --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; margin: 25px 0; }
+        /* --- BUTTONS --- */
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
         
         .main-btn { 
             display: inline-flex; align-items: center; gap: 12px; 
-            background: var(--gradient); /* Exact gradient from image */
-            color: white !important; padding: 14px 32px; border-radius: 50px; 
-            text-decoration: none; font-weight: 600; font-size: 16px;
-            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.3);
+            background: var(--gradient); color: white !important; 
+            padding: 14px 32px; border-radius: 50px; 
+            text-decoration: none; font-weight: 600; font-size: 15px;
+            animation: glow 3s infinite alternate; 
         }
-        .main-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4); }
 
-        /* --- PROFILE & CONTENT --- */
-        .top-section { padding: 80px 20px 40px; text-align: center; }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(0, 200, 83, 0.2); }
+            to { box-shadow: 0 0 25px rgba(0, 200, 83, 0.6); }
+        }
+
+        /* --- LAYOUT & CARDS --- */
+        .top-section { padding: 100px 20px 40px; text-align: center; }
         .profile-img { 
             width: 150px; height: 150px; border-radius: 50%; 
-            border: 5px solid rgba(255,255,255,0.1); margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 4px solid var(--accent-green); margin-bottom: 20px;
         }
 
         h1 { font-size: 2.8rem; letter-spacing: 2px; }
-        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.8; margin-bottom: 20px; }
+        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.7; margin-bottom: 25px; }
 
         .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
         .card { 
-            background: var(--card); padding: 35px; border-radius: 20px; 
+            background: var(--card); padding: 35px; border-radius: 24px; 
             margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); 
-            backdrop-filter: blur(10px); text-align: left;
+            backdrop-filter: blur(12px); text-align: left;
         }
         
-        /* Card Title Icons */
-        h2 { color: var(--accent-green); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
-        p { font-family: 'Courier Prime', monospace; }
+        h2 { color: var(--accent-green); margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        p { font-family: 'Courier Prime', monospace; opacity: 0.9; line-height: 1.8; }
 
-        /* Info Tooltip */
-        .info-box { color: var(--accent-green); cursor: pointer; margin-top: 10px; display: inline-block; }
-        .info-text { font-family: 'Courier Prime', monospace; margin-left: 5px; color: white; opacity: 0.7; }
+        /* The Quote Box - Permanent and Visible */
+        .quote-box {
+            background: rgba(0, 200, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 0 12px 12px 0;
+        }
 
-        footer { padding: 40px; opacity: 0.5; font-size: 12px; font-family: 'Courier Prime', monospace; }
+        .quote-arabic {
+            font-size: 1.6rem;
+            text-align: right;
+            direction: rtl;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        footer { padding: 40px; opacity: 0.4; font-size: 12px; font-family: 'Courier Prime', monospace; text-align: center; }
     </style>
 </head>
 <body>
@@ -89,9 +107,10 @@
     <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
 
     <div class="sidebar" id="sidebar">
+        <div class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
         <a href="#"><i class="fas fa-home"></i> Home</a>
-        <a href="#"><i class="fas fa-user"></i> Profile</a>
-        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="#projects" onclick="toggleSidebar()"><i class="fas fa-star"></i> My Quotes</a>
+        <a href="#about" onclick="toggleSidebar()"><i class="fas fa-user"></i> My Vision</a>
     </div>
 
     <div class="top-section">
@@ -103,18 +122,24 @@
             <a href="https://t.me/affan_4" class="main-btn">
                 <i class="fab fa-telegram"></i> CONTACT ME
             </a>
-            <a href="#about" class="main-btn">
-                <i class="fas fa-code"></i> MY PROJECTS
+            <a href="#projects" class="main-btn">
+                <i class="fas fa-pen-nib"></i> READ QUOTES
             </a>
-        </div>
-
-        <div class="info-box">
-            <i class="fas fa-info-circle"></i> <span class="info-text">info</span>
         </div>
     </div>
 
-    <div class="container" id="about">
+    <div class="container" id="projects">
         <div class="card">
+            <h2><i class="fas fa-quote-right"></i> MY INSPIRATION</h2>
+            <p>Words that guide my life and work:</p>
+            <div class="quote-box">
+                <div class="quote-arabic">
+                    ١. كل ما فعله الجليل فهو جميل!
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="about">
             <h2><i class="fas fa-bullseye"></i> MY VISION</h2>
             <p>I am building the digital tools of the future by mastering web technologies today.</p>
         </div>
@@ -127,13 +152,12 @@
     <script>
         function toggleSidebar() {
             var s = document.getElementById("sidebar");
-            s.style.left = s.style.left === "0px" ? "-250px" : "0px";
+            s.style.left = s.style.left === "0px" ? "-280px" : "0px";
         }
-        // Auto-close sidebar
         document.addEventListener('click', function(e) {
             var s = document.getElementById("sidebar");
             var m = document.querySelector('.menu-btn');
-            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-250px";
+            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-280px";
         });
     </script>
 </body>
