@@ -27,66 +27,62 @@
             cursor: pointer; z-index: 1001;
             background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
         }
-
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
             background: var(--sidebar-bg); padding-top: 60px; transition: 0.5s cubic-bezier(0.77,0,0.175,1); z-index: 1000;
         }
-
         .close-sidebar { position: absolute; top: 20px; right: 20px; font-size: 22px; color: var(--accent-green); cursor: pointer; }
-
         .sidebar a { padding: 15px 30px; text-decoration: none; font-size: 16px; color: #e0e0e0; display: block; }
         .sidebar a i { margin-right: 15px; color: var(--accent-green); width: 20px; }
-        .sidebar a:hover { background: rgba(0, 200, 83, 0.1); color: white; }
 
-        /* --- TOP SECTION --- */
+        /* --- HEADER --- */
         .top-section { padding: 100px 20px 40px; text-align: center; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent-green); margin-bottom: 20px; }
-        h1 { font-size: 2.8rem; letter-spacing: 2px; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent-green); margin-bottom: 20px; }
+        h1 { font-size: 2.5rem; letter-spacing: 2px; }
         .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.7; margin-bottom: 25px; }
 
         /* --- BUTTONS --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; }
         .main-btn { 
             display: inline-flex; align-items: center; gap: 12px; 
             background: var(--gradient); color: white !important; 
-            padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600;
+            padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600;
             animation: glow 3s infinite alternate; 
         }
         @keyframes glow { from { box-shadow: 0 0 10px rgba(0, 200, 83, 0.2); } to { box-shadow: 0 0 25px rgba(0, 200, 83, 0.6); } }
 
-        /* --- INFO TOOLTIP --- */
-        .info-box { position: relative; color: var(--accent-green); cursor: pointer; margin-bottom: 40px; display: inline-block; }
-        .info-text { font-family: 'Courier Prime', monospace; color: white; opacity: 0.6; margin-left: 5px; }
-        .tooltip-text {
-            visibility: hidden; width: 220px; background: #0088cc; color: white; text-align: left;
-            border-radius: 10px; padding: 15px; position: absolute; bottom: 150%; left: 50%; margin-left: -110px; opacity: 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 10;
-        }
-        .info-box:hover .tooltip-text { visibility: visible; opacity: 1; }
-
-        /* --- INTERACTIVE CARDS --- */
-        .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
+        /* --- CARDS --- */
+        .container { max-width: 650px; margin: 0 auto 60px; padding: 0 20px; }
         .card { 
-            background: var(--card); padding: 35px; border-radius: 24px; margin-bottom: 25px; 
-            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px); 
-            cursor: pointer; position: relative;
+            background: var(--card); padding: 30px; border-radius: 24px; margin-bottom: 20px; 
+            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);
         }
-        .card:active { transform: scale(0.97); }
-        .card:hover { border-color: var(--accent-green); }
-        .card::after { content: "\f105"; font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--accent-green); }
+        h2 { color: var(--accent-green); margin-bottom: 15px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        p { font-family: 'Courier Prime', monospace; font-size: 0.95rem; opacity: 0.9; }
 
-        h2 { color: var(--accent-green); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
-        p { font-family: 'Courier Prime', monospace; opacity: 0.9; }
+        /* --- WISDOM OF THE DAY STYLE --- */
+        .wisdom-box { 
+            background: rgba(0, 200, 83, 0.05); 
+            border-left: 4px solid var(--accent-green); 
+            padding: 20px; border-radius: 0 15px 15px 0; margin-top: 15px;
+        }
+        .wisdom-arabic { text-align: right; direction: rtl; font-size: 1.3rem; color: var(--accent-green); margin-bottom: 10px; }
+        .refresh-wisdom { cursor: pointer; color: var(--accent-green); font-size: 0.8rem; text-decoration: underline; margin-top: 10px; display: inline-block; }
 
-        /* --- FULL SCREEN INTERNAL VIEW --- */
+        /* --- SEARCH INPUT --- */
+        .search-container { display: flex; gap: 10px; margin-top: 20px; }
+        input[type="text"] {
+            flex: 1; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.2); color: white; outline: none; font-family: 'Poppins';
+        }
+
+        /* --- INTERNAL VIEW --- */
         #internal-view {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #0d0d26; z-index: 2000; padding: 40px 20px; overflow-y: auto;
         }
-        .back-btn { color: var(--accent-green); cursor: pointer; font-size: 1.1rem; margin-bottom: 30px; display: inline-block; font-weight: 600; }
+        .back-btn { color: var(--accent-green); cursor: pointer; margin-bottom: 30px; display: inline-block; }
         .quote-item { border-left: 3px solid var(--accent-green); padding: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); border-radius: 0 15px 15px 0; }
-        .quote-arabic { text-align: right; direction: rtl; font-size: 1.4rem; color: var(--accent-green); margin-bottom: 5px; }
 
         footer { padding: 40px; opacity: 0.4; font-size: 12px; font-family: 'Courier Prime', monospace; text-align: center; }
     </style>
@@ -98,53 +94,74 @@
     <div class="sidebar" id="sidebar">
         <div class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
         <a href="#"><i class="fas fa-home"></i> Home</a>
-        <a href="javascript:void(0)" onclick="openQuotes(); toggleSidebar();"><i class="fas fa-star"></i> My Quotes</a>
-        <a href="#about" onclick="toggleSidebar()"><i class="fas fa-user"></i> My Vision</a>
-        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a href="javascript:void(0)" onclick="openQuotes()"><i class="fas fa-star"></i> My Quotes</a>
+        <a href="#"><i class="fas fa-mosque"></i> Islamic Search</a>
     </div>
 
     <div class="top-section">
         <img src="me.png" alt="Affan" class="profile-img">
         <h1>AFFAN</h1>
         <p class="subtitle">Student & Aspiring Developer</p>
-        
         <div class="btn-group">
-            <a href="https://t.me/affan_4" class="main-btn"><i class="fab fa-telegram"></i> CONTACT ME</a>
-            <a href="javascript:void(0)" onclick="openQuotes()" class="main-btn"><i class="fas fa-pen-nib"></i> READ QUOTES</a>
-        </div>
-
-        <div class="info-box">
-            <i class="fas fa-info-circle"></i><span class="info-text">info</span>
-            <span class="tooltip-text">📍 Addis Ababa, Ethiopia <br> 🚀 Learning Web Dev <br> ✨ Student @ 2026</span>
+            <a href="https://t.me/affan_4" class="main-btn"><i class="fab fa-telegram"></i> CONTACT</a>
+            <a href="javascript:void(0)" onclick="openQuotes()" class="main-btn"><i class="fas fa-pen-nib"></i> QUOTES</a>
         </div>
     </div>
 
     <div class="container">
-        <div class="card" id="projects" onclick="openQuotes()">
-            <h2><i class="fas fa-quote-left"></i> INSPIRATIONAL QUOTES</h2>
-            <p>Click to step inside and view my collection of wisdom and translated quotes.</p>
+        <div class="card">
+            <h2><i class="fas fa-book-open"></i> WISDOM OF THE DAY</h2>
+            <div class="wisdom-box" id="wisdom-container">
+                <div class="wisdom-arabic" id="arabic-wisdom">Loading...</div>
+                <p id="english-wisdom">Loading wisdom...</p>
+            </div>
+            <span class="refresh-wisdom" onclick="refreshWisdom()"><i class="fas fa-sync-alt"></i> Get New Wisdom</span>
         </div>
 
-        <div class="card" id="about">
-            <h2><i class="fas fa-bullseye"></i> MY VISION</h2>
-            <p>I am building the digital tools of the future by mastering web technologies today.</p>
+        <div class="card">
+            <h2><i class="fas fa-search"></i> ISLAMIC SEARCH</h2>
+            <div class="search-container">
+                <input type="text" id="islamicQuery" placeholder="Hadith topics..." onkeydown="if(event.key==='Enter') searchIslamic()">
+                <button onclick="searchIslamic()" style="background: var(--gradient); border: none; padding: 0 20px; border-radius: 12px; color: white; cursor: pointer;">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="card" style="cursor: pointer;" onclick="openQuotes()">
+            <h2><i class="fas fa-quote-left"></i> WISDOM COLLECTION</h2>
+            <p>Click to view full collection of translated quotes.</p>
         </div>
     </div>
 
     <div id="internal-view">
-        <div class="back-btn" onclick="closeQuotes()"><i class="fas fa-arrow-left"></i> BACK TO PROFILE</div>
-        <h2 style="margin-bottom: 30px;">WISDOM COLLECTION</h2>
-        
+        <div class="back-btn" onclick="closeQuotes()"><i class="fas fa-arrow-left"></i> BACK</div>
+        <h2 style="margin-bottom: 25px;">WISDOM COLLECTION</h2>
         <div class="quote-item"><div class="quote-arabic">١. إِنَّ مَعَ الْعُسْرِ يُسْرًا 👉</div><p>"With hardship comes ease."</p></div>
         <div class="quote-item"><div class="quote-arabic">٢. الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه 👉</div><p>"Hearts find peace in the remembrance of Allah."</p></div>
-        <div class="quote-item"><div class="quote-arabic">٣. حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيل 👉</div><p>"Allah is sufficient for us."</p></div>
-        <div class="quote-item"><div class="quote-arabic">٤. لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا 👉</div><p>"Do not grieve; Allah is with us."</p></div>
-        <div class="quote-item"><div class="quote-arabic">٥. الصَّبْرُ مِفْتَاحُ الْفَرَج 👉</div><p>"Patience is the key to relief."</p></div>
     </div>
 
     <footer><p>© 2026 AFFAN. ALL RIGHTS RESERVED.</p></footer>
 
     <script>
+        const wisdoms = [
+            { a: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", e: "With hardship comes ease. (Quran 94:6)" },
+            { a: "الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه", e: "Hearts find peace in the remembrance of Allah. (Quran 13:28)" },
+            { a: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيل", e: "Allah is sufficient for us, and He is the best disposer of affairs." },
+            { a: "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا", e: "Do not grieve; Allah is with us. (Quran 9:40)" },
+            { a: "الصَّبْرُ مِفْتَاحُ الْفَرَج", e: "Patience is the key to relief." },
+            { a: "خَيْرُ الناسِ أَنْفَعُهُمْ لِلناسِ", e: "The best of people are those that bring most benefit to others. (Hadith)" }
+        ];
+
+        function refreshWisdom() {
+            const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
+            document.getElementById('arabic-wisdom').innerText = random.a + " 👉";
+            document.getElementById('english-wisdom').innerText = random.e;
+        }
+
+        // Initialize on load
+        window.onload = refreshWisdom;
+
         function toggleSidebar() {
             var s = document.getElementById("sidebar");
             s.style.left = s.style.left === "0px" ? "-280px" : "0px";
@@ -157,11 +174,10 @@
             document.getElementById('internal-view').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-        document.addEventListener('click', function(e) {
-            var s = document.getElementById("sidebar");
-            var m = document.querySelector('.menu-btn');
-            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-280px";
-        });
+        function searchIslamic() {
+            const q = document.getElementById('islamicQuery').value;
+            if(q) window.open('https://sunnah.com/search?q=' + encodeURIComponent(q), '_blank');
+        }
     </script>
 </body>
 </html>
