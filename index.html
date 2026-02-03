@@ -3,88 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | Professional Portfolio</title>
+    <title>Affan | The Ultimate Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
 
         :root { 
-            --bg: #1a1a3a; 
+            --bg: #0a0a1a; 
             --text: #ffffff; 
-            --card: rgba(255, 255, 255, 0.1); 
-            --gradient: linear-gradient(90deg, #0d4b5f 0%, #00c853 100%);
-            --accent-green: #00c853; 
-            --sidebar-bg: #0d0d26;
+            --card: rgba(255, 255, 255, 0.06); 
+            --gradient: linear-gradient(135deg, #0d4b5f 0%, #00c853 100%);
+            --accent: #00c853; 
+            --sidebar-bg: #050510;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* --- SIDEBAR --- */
-        .menu-btn {
-            position: fixed; top: 20px; left: 20px;
-            font-size: 24px; color: var(--accent-green);
-            cursor: pointer; z-index: 1001;
-            background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
-        }
-        .sidebar {
-            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: var(--sidebar-bg); padding-top: 60px; transition: 0.5s cubic-bezier(0.77,0,0.175,1); z-index: 1000;
-        }
-        .close-sidebar { position: absolute; top: 20px; right: 20px; font-size: 22px; color: var(--accent-green); cursor: pointer; }
-        .sidebar a { padding: 15px 30px; text-decoration: none; font-size: 16px; color: #e0e0e0; display: block; }
-        .sidebar a i { margin-right: 15px; color: var(--accent-green); width: 20px; }
+        /* --- SCROLL REVEAL --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- HEADER --- */
-        .top-section { padding: 100px 20px 40px; text-align: center; }
-        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent-green); margin-bottom: 20px; }
-        h1 { font-size: 2.5rem; letter-spacing: 2px; }
-        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.7; margin-bottom: 25px; }
+        /* --- SIDEBAR (CONSERVED) --- */
+        .menu-btn { position: fixed; top: 20px; left: 20px; font-size: 22px; color: var(--accent); cursor: pointer; z-index: 1001; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--sidebar-bg); padding-top: 80px; z-index: 1000; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        .sidebar a { padding: 18px 30px; text-decoration: none; font-size: 16px; color: #e0e0e0; display: block; }
+        .sidebar a i { margin-right: 15px; color: var(--accent); width: 20px; }
 
-        /* --- BUTTONS --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; }
+        /* --- TOP SECTION --- */
+        .top-section { padding: 120px 20px 60px; text-align: center; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 25px; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2); }
+        h1 { font-size: 3rem; letter-spacing: 4px; font-weight: 600; text-transform: uppercase; }
+        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.6; margin-bottom: 30px; }
+
+        /* --- GLOW BUTTONS (CONSERVED) --- */
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
         .main-btn { 
-            display: inline-flex; align-items: center; gap: 12px; 
-            background: var(--gradient); color: white !important; 
-            padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 12px; background: var(--gradient); color: white !important; 
+            padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; 
             animation: glow 3s infinite alternate; 
         }
         @keyframes glow { from { box-shadow: 0 0 10px rgba(0, 200, 83, 0.2); } to { box-shadow: 0 0 25px rgba(0, 200, 83, 0.6); } }
 
-        /* --- CARDS --- */
-        .container { max-width: 650px; margin: 0 auto 60px; padding: 0 20px; }
-        .card { 
-            background: var(--card); padding: 30px; border-radius: 24px; margin-bottom: 20px; 
-            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+        /* --- INFO TOOLTIP (CONSERVED) --- */
+        .info-box { position: relative; color: var(--accent); cursor: pointer; margin-bottom: 40px; display: inline-block; }
+        .tooltip-text {
+            visibility: hidden; width: 220px; background: #0088cc; color: white; text-align: left;
+            border-radius: 10px; padding: 15px; position: absolute; bottom: 150%; left: 50%; margin-left: -110px; opacity: 0;
         }
-        h2 { color: var(--accent-green); margin-bottom: 15px; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
-        p { font-family: 'Courier Prime', monospace; font-size: 0.95rem; opacity: 0.9; }
+        .info-box:hover .tooltip-text { visibility: visible; opacity: 1; }
 
-        /* --- WISDOM OF THE DAY STYLE --- */
-        .wisdom-box { 
-            background: rgba(0, 200, 83, 0.05); 
-            border-left: 4px solid var(--accent-green); 
-            padding: 20px; border-radius: 0 15px 15px 0; margin-top: 15px;
-        }
-        .wisdom-arabic { text-align: right; direction: rtl; font-size: 1.3rem; color: var(--accent-green); margin-bottom: 10px; }
-        .refresh-wisdom { cursor: pointer; color: var(--accent-green); font-size: 0.8rem; text-decoration: underline; margin-top: 10px; display: inline-block; }
+        /* --- CONTAINERS & CARDS --- */
+        .container { max-width: 700px; margin: 0 auto 120px; padding: 0 20px; }
+        .card { background: var(--card); padding: 35px; border-radius: 30px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px); }
+        h2 { color: var(--accent); margin-bottom: 20px; font-size: 1.4rem; display: flex; align-items: center; gap: 15px; }
 
-        /* --- SEARCH INPUT --- */
-        .search-container { display: flex; gap: 10px; margin-top: 20px; }
-        input[type="text"] {
-            flex: 1; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(0,0,0,0.2); color: white; outline: none; font-family: 'Poppins';
-        }
+        /* --- TASBEEH & SEARCH (CONSERVED) --- */
+        .ui-box { background: rgba(0,0,0,0.3); padding: 25px; border-radius: 20px; text-align: center; }
+        .counter-val { font-size: 4rem; color: var(--accent); font-family: 'Courier Prime'; }
+        .tap-btn { width: 80px; height: 80px; border-radius: 50%; border: none; background: var(--gradient); color: white; font-size: 1.5rem; cursor: pointer; }
+        input[type="text"] { width: 100%; padding: 16px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); color: white; outline: none; font-family: 'Poppins'; }
 
-        /* --- INTERNAL VIEW --- */
-        #internal-view {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #0d0d26; z-index: 2000; padding: 40px 20px; overflow-y: auto;
-        }
-        .back-btn { color: var(--accent-green); cursor: pointer; margin-bottom: 30px; display: inline-block; }
-        .quote-item { border-left: 3px solid var(--accent-green); padding: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); border-radius: 0 15px 15px 0; }
+        /* --- INTERNAL VIEW (CONSERVED) --- */
+        #internal-view { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 2000; padding: 60px 20px; overflow-y: auto; }
+        .back-btn { color: var(--accent); cursor: pointer; margin-bottom: 40px; display: inline-block; font-weight: 600; }
+        .quote-card { border-left: 4px solid var(--accent); padding: 20px; background: rgba(255,255,255,0.03); margin-bottom: 25px; border-radius: 0 20px 20px 0; }
+        .quote-arabic { text-align: right; direction: rtl; font-size: 1.8rem; color: var(--accent); }
 
-        footer { padding: 40px; opacity: 0.4; font-size: 12px; font-family: 'Courier Prime', monospace; text-align: center; }
+        /* --- SHARE FAB --- */
+        .share-fab { position: fixed; bottom: 30px; right: 30px; background: var(--gradient); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; z-index: 999; }
+
+        footer { padding: 60px; opacity: 0.3; font-size: 12px; text-align: center; }
     </style>
 </head>
 <body>
@@ -92,92 +82,106 @@
     <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
 
     <div class="sidebar" id="sidebar">
-        <div class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
-        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <div onclick="toggleSidebar()" style="position:absolute; top:20px; right:20px; color:var(--accent); cursor:pointer;"><i class="fas fa-times"></i></div>
+        <a href="#"><i class="fas fa-home"></i> Dashboard</a>
         <a href="javascript:void(0)" onclick="openQuotes()"><i class="fas fa-star"></i> My Quotes</a>
-        <a href="#"><i class="fas fa-mosque"></i> Islamic Search</a>
+        <a href="#search-card"><i class="fas fa-search"></i> Hadith Search</a>
+        <a href="https://t.me/affan_4"><i class="fab fa-telegram"></i> Contact</a>
     </div>
 
     <div class="top-section">
         <img src="me.png" alt="Affan" class="profile-img">
-        <h1>AFFAN</h1>
-        <p class="subtitle">Student & Aspiring Developer</p>
-        <div class="btn-group">
-            <a href="https://t.me/affan_4" class="main-btn"><i class="fab fa-telegram"></i> CONTACT</a>
-            <a href="javascript:void(0)" onclick="openQuotes()" class="main-btn"><i class="fas fa-pen-nib"></i> QUOTES</a>
+        <h1 class="reveal">AFFAN</h1>
+        <p class="subtitle reveal">Student & Developer</p>
+        
+        <div class="btn-group reveal">
+            <a href="https://t.me/affan_4" class="main-btn"><i class="fab fa-telegram"></i> CONTACT ME</a>
+            <a href="javascript:void(0)" onclick="openQuotes()" class="main-btn"><i class="fas fa-bolt"></i> EXPLORE QUOTES</a>
+        </div>
+
+        <div class="info-box reveal">
+            <i class="fas fa-info-circle"></i><span style="opacity:0.6; margin-left:5px;">info</span>
+            <span class="tooltip-text">📍 Addis Ababa, Ethiopia <br> 🚀 Web Tech Enthusiast <br> ✨ Student @ 2026</span>
         </div>
     </div>
 
     <div class="container">
-        <div class="card">
-            <h2><i class="fas fa-book-open"></i> WISDOM OF THE DAY</h2>
-            <div class="wisdom-box" id="wisdom-container">
-                <div class="wisdom-arabic" id="arabic-wisdom">Loading...</div>
-                <p id="english-wisdom">Loading wisdom...</p>
-            </div>
-            <span class="refresh-wisdom" onclick="refreshWisdom()"><i class="fas fa-sync-alt"></i> Get New Wisdom</span>
-        </div>
-
-        <div class="card">
-            <h2><i class="fas fa-search"></i> ISLAMIC SEARCH</h2>
-            <div class="search-container">
-                <input type="text" id="islamicQuery" placeholder="Hadith topics..." onkeydown="if(event.key==='Enter') searchIslamic()">
-                <button onclick="searchIslamic()" style="background: var(--gradient); border: none; padding: 0 20px; border-radius: 12px; color: white; cursor: pointer;">
-                    <i class="fas fa-search"></i>
-                </button>
+        <div class="card reveal">
+            <h2><i class="fas fa-fingerprint"></i> DIGITAL TASBEEH</h2>
+            <div class="ui-box">
+                <div class="counter-val" id="t-count">0</div>
+                <button class="tap-btn" onclick="addCount()"><i class="fas fa-plus"></i></button>
+                <p onclick="resetCount()" style="margin-top:20px; font-size:12px; color:var(--accent); cursor:pointer; text-decoration: underline;">RESET</p>
             </div>
         </div>
 
-        <div class="card" style="cursor: pointer;" onclick="openQuotes()">
-            <h2><i class="fas fa-quote-left"></i> WISDOM COLLECTION</h2>
-            <p>Click to view full collection of translated quotes.</p>
+        <div class="card reveal" id="search-card">
+            <h2><i class="fas fa-mosque"></i> HADITH SEARCH</h2>
+            <input type="text" id="h-input" placeholder="Search Hadith..." onkeydown="if(event.key==='Enter') runSearch()">
+        </div>
+
+        <div class="card reveal">
+            <h2><i class="fas fa-compass"></i> MY VISION</h2>
+            <p>I am building the digital tools of the future by mastering web technologies today.</p>
         </div>
     </div>
+
+    <div class="share-fab" onclick="copyURL()"><i class="fas fa-share-alt"></i></div>
 
     <div id="internal-view">
-        <div class="back-btn" onclick="closeQuotes()"><i class="fas fa-arrow-left"></i> BACK</div>
-        <h2 style="margin-bottom: 25px;">WISDOM COLLECTION</h2>
-        <div class="quote-item"><div class="quote-arabic">١. إِنَّ مَعَ الْعُسْرِ يُسْرًا 👉</div><p>"With hardship comes ease."</p></div>
-        <div class="quote-item"><div class="quote-arabic">٢. الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه 👉</div><p>"Hearts find peace in the remembrance of Allah."</p></div>
+        <div class="container">
+            <div class="back-btn" onclick="closeQuotes()"><i class="fas fa-chevron-left"></i> BACK TO PROFILE</div>
+            <h2 style="font-size: 2rem; margin-bottom: 40px;">WISDOM COLLECTION</h2>
+            <div class="quote-card"><div class="quote-arabic">١. إِنَّ مَعَ الْعُسْرِ يُسْرًا 👉</div><p>"With hardship comes ease."</p></div>
+            <div class="quote-card"><div class="quote-arabic">٢. الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه 👉</div><p>"Hearts find peace in the remembrance of Allah."</p></div>
+        </div>
     </div>
 
-    <footer><p>© 2026 AFFAN. ALL RIGHTS RESERVED.</p></footer>
+    <footer>© 2026 AFFAN | ALL RIGHTS RESERVED</footer>
 
     <script>
-        const wisdoms = [
-            { a: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", e: "With hardship comes ease. (Quran 94:6)" },
-            { a: "الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه", e: "Hearts find peace in the remembrance of Allah. (Quran 13:28)" },
-            { a: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيل", e: "Allah is sufficient for us, and He is the best disposer of affairs." },
-            { a: "لَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا", e: "Do not grieve; Allah is with us. (Quran 9:40)" },
-            { a: "الصَّبْرُ مِفْتَاحُ الْفَرَج", e: "Patience is the key to relief." },
-            { a: "خَيْرُ الناسِ أَنْفَعُهُمْ لِلناسِ", e: "The best of people are those that bring most benefit to others. (Hadith)" }
-        ];
+        // Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(r => {
+                var windowHeight = window.innerHeight;
+                var elementTop = r.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) { r.classList.add("active"); }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
 
-        function refreshWisdom() {
-            const random = wisdoms[Math.floor(Math.random() * wisdoms.length)];
-            document.getElementById('arabic-wisdom').innerText = random.a + " 👉";
-            document.getElementById('english-wisdom').innerText = random.e;
+        // Tasbeeh
+        let count = 0;
+        function addCount() { count++; document.getElementById('t-count').innerText = count; if(navigator.vibrate) navigator.vibrate(40); }
+        function resetCount() { count = 0; document.getElementById('t-count').innerText = count; }
+
+        // Search
+        function runSearch() {
+            const q = document.getElementById('h-input').value;
+            if(q) window.open('https://sunnah.com/search?q=' + encodeURIComponent(q), '_blank');
         }
 
-        // Initialize on load
-        window.onload = refreshWisdom;
-
+        // Sidebar & View
         function toggleSidebar() {
             var s = document.getElementById("sidebar");
             s.style.left = s.style.left === "0px" ? "-280px" : "0px";
         }
-        function openQuotes() {
-            document.getElementById('internal-view').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+        function openQuotes() { document.getElementById('internal-view').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+        function closeQuotes() { document.getElementById('internal-view').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // Copy URL
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Profile link copied!");
         }
-        function closeQuotes() {
-            document.getElementById('internal-view').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        function searchIslamic() {
-            const q = document.getElementById('islamicQuery').value;
-            if(q) window.open('https://sunnah.com/search?q=' + encodeURIComponent(q), '_blank');
-        }
+
+        document.addEventListener('click', function(e) {
+            var s = document.getElementById("sidebar");
+            var m = document.querySelector('.menu-btn');
+            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-280px";
+        });
     </script>
 </body>
 </html>
