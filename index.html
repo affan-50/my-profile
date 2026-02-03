@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | Pro Profile</title>
+    <title>Affan | Interactive Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
@@ -14,151 +14,104 @@
             --card: rgba(255, 255, 255, 0.1); 
             --gradient: linear-gradient(90deg, #0d4b5f 0%, #00c853 100%);
             --accent-green: #00c853; 
-            --sidebar-bg: #0d0d26;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* --- SIDEBAR --- */
-        .menu-btn {
-            position: fixed; top: 20px; left: 20px;
-            font-size: 24px; color: var(--accent-green);
-            cursor: pointer; z-index: 1001;
-            background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
-        }
-
-        .sidebar {
-            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: var(--sidebar-bg); padding-top: 60px; transition: 0.5s cubic-bezier(0.77,0,0.175,1); z-index: 1000;
-        }
-
-        .close-sidebar {
-            position: absolute; top: 20px; right: 20px;
-            font-size: 22px; color: var(--accent-green); cursor: pointer;
-        }
-
-        .sidebar a {
-            padding: 15px 30px; text-decoration: none; font-size: 16px;
-            color: #e0e0e0; display: block; font-family: 'Poppins', sans-serif;
-        }
-        .sidebar a i { margin-right: 15px; color: var(--accent-green); width: 20px; }
-        .sidebar a:hover { background: rgba(0, 200, 83, 0.1); color: white; }
-
-        /* --- BUTTONS --- */
-        .btn-group { display: flex; gap: 15px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
-        
-        .main-btn { 
-            display: inline-flex; align-items: center; gap: 12px; 
-            background: var(--gradient); color: white !important; 
-            padding: 14px 32px; border-radius: 50px; 
-            text-decoration: none; font-weight: 600; font-size: 15px;
-            animation: glow 3s infinite alternate; 
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(0, 200, 83, 0.2); }
-            to { box-shadow: 0 0 25px rgba(0, 200, 83, 0.6); }
-        }
-
-        /* --- LAYOUT & CARDS --- */
-        .top-section { padding: 100px 20px 40px; text-align: center; }
-        .profile-img { 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 4px solid var(--accent-green); margin-bottom: 20px;
-        }
-
-        h1 { font-size: 2.8rem; letter-spacing: 2px; }
-        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.7; margin-bottom: 25px; }
-
-        .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
+        /* --- APP STYLE CLICKABLE CARDS --- */
         .card { 
-            background: var(--card); padding: 35px; border-radius: 24px; 
-            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); 
-            backdrop-filter: blur(12px); text-align: left;
+            background: var(--card); 
+            padding: 25px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            backdrop-filter: blur(12px); 
+            cursor: pointer; /* ነካ ሲደረግ የእጅ ምልክት እንዲያሳይ */
+            position: relative;
+            overflow: hidden;
         }
+
+        /* ካርዱ ሲነካ (ወይም Hover ሲደረግ) የሚኖረው ተፅዕኖ */
+        .card:active { transform: scale(0.95); } /* እንደ App ሲነካ ሰርጎ የመግባት ስሜት ይሰጣል */
+        .card:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--accent-green); }
+
+        .card-link { text-decoration: none; color: inherit; display: block; }
+
+        /* ካርዱ ውስጥ ያለ ምልክት (Arrow) */
+        .card::after {
+            content: "\f105"; font-family: "Font Awesome 5 Free"; font-weight: 900;
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            color: var(--accent-green); opacity: 0.5; font-size: 20px;
+        }
+
+        .top-section { padding: 80px 20px 40px; text-align: center; }
+        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--accent-green); margin-bottom: 15px; }
         
-        h2 { color: var(--accent-green); margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
-        p { font-family: 'Courier Prime', monospace; opacity: 0.9; line-height: 1.8; }
+        h2 { color: var(--accent-green); font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        p { font-family: 'Courier Prime', monospace; font-size: 0.9rem; opacity: 0.8; }
 
-        /* The Quote Box - Permanent and Visible */
-        .quote-box {
-            background: rgba(0, 200, 83, 0.05);
-            border-left: 4px solid var(--accent-green);
-            padding: 20px;
-            margin-top: 15px;
-            border-radius: 0 12px 12px 0;
-        }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
 
-        .quote-arabic {
-            font-size: 1.6rem;
-            text-align: right;
-            direction: rtl;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            margin-bottom: 10px;
-        }
-
-        footer { padding: 40px; opacity: 0.4; font-size: 12px; font-family: 'Courier Prime', monospace; text-align: center; }
+        /* ጥቅሶች ዝርዝር ገጽ (Hidden initially) */
+        #quotes-detail { display: none; padding: 20px; background: #0d0d26; min-height: 100vh; position: fixed; top: 0; left: 0; width: 100%; z-index: 2000; overflow-y: auto; }
+        .back-btn { color: var(--accent-green); cursor: pointer; margin-bottom: 30px; display: inline-block; font-size: 1.2rem; }
+        
+        .quote-item { border-left: 3px solid var(--accent-green); padding: 15px; margin-bottom: 20px; background: rgba(255,255,255,0.03); border-radius: 0 15px 15px 0; }
+        .quote-arabic { text-align: right; direction: rtl; font-size: 1.4rem; color: var(--accent-green); }
     </style>
 </head>
 <body>
 
-    <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
-
-    <div class="sidebar" id="sidebar">
-        <div class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></div>
-        <a href="#"><i class="fas fa-home"></i> Home</a>
-        <a href="#projects" onclick="toggleSidebar()"><i class="fas fa-star"></i> My Quotes</a>
-        <a href="#about" onclick="toggleSidebar()"><i class="fas fa-user"></i> My Vision</a>
-    </div>
-
     <div class="top-section">
         <img src="me.png" alt="Affan" class="profile-img">
         <h1>AFFAN</h1>
-        <p class="subtitle">Student & Aspiring Developer</p>
-        
-        <div class="btn-group">
-            <a href="https://t.me/affan_4" class="main-btn">
-                <i class="fab fa-telegram"></i> CONTACT ME
-            </a>
-            <a href="#projects" class="main-btn">
-                <i class="fas fa-pen-nib"></i> READ QUOTES
-            </a>
-        </div>
+        <p>Student & Aspiring Developer</p>
     </div>
 
-    <div class="container" id="projects">
+    <div class="container">
+        <div class="card" onclick="openQuotes()">
+            <h2><i class="fas fa-quote-left"></i> INSPIRATIONAL QUOTES</h2>
+            <p>ነክተህ ወደ ጥቅሶቹ ዝርዝር ግባ...</p>
+        </div>
+
         <div class="card">
-            <h2><i class="fas fa-quote-right"></i> MY INSPIRATION</h2>
-            <p>Words that guide my life and work:</p>
-            <div class="quote-box">
-                <div class="quote-arabic">
-                    ١. كل ما فعله الجليل فهو جميل!
-                </div>
-            </div>
-        </div>
-
-        <div class="card" id="about">
             <h2><i class="fas fa-bullseye"></i> MY VISION</h2>
-            <p>I am building the digital tools of the future by mastering web technologies today.</p>
+            <p>I am building the digital tools of tomorrow.</p>
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 AFFAN. ALL RIGHTS RESERVED.</p>
-    </footer>
+    <div id="quotes-detail">
+        <div class="back-btn" onclick="closeQuotes()"><i class="fas fa-arrow-left"></i> ተመለስ (Back)</div>
+        
+        <h2 style="margin-bottom: 30px;">MY COLLECTION</h2>
+
+        <div class="quote-item">
+            <div class="quote-arabic">👉 ١. إِنَّ مَعَ الْعُسْرِ يُسْرًا</div>
+            <p>"With hardship comes ease."</p>
+        </div>
+
+        <div class="quote-item">
+            <div class="quote-arabic">👉 ٢. الْقُلُوبُ تَطْمَئِنُّ بِذِكْرِ اللَّه</div>
+            <p>"Hearts find peace in the remembrance of Allah."</p>
+        </div>
+
+        <div class="quote-item">
+            <div class="quote-arabic">👉 ٣. حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيل</div>
+            <p>"Allah is sufficient for us."</p>
+        </div>
+    </div>
 
     <script>
-        function toggleSidebar() {
-            var s = document.getElementById("sidebar");
-            s.style.left = s.style.left === "0px" ? "-280px" : "0px";
+        function openQuotes() {
+            document.getElementById('quotes-detail').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // ዋናው ገጽ እንዳይንቀሳቀስ
         }
-        document.addEventListener('click', function(e) {
-            var s = document.getElementById("sidebar");
-            var m = document.querySelector('.menu-btn');
-            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-280px";
-        });
+
+        function closeQuotes() {
+            document.getElementById('quotes-detail').style.display = 'none';
+            document.body.style.overflow = 'auto'; // መልሶ እንዲንቀሳቀስ
+        }
     </script>
 </body>
 </html>
