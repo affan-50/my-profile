@@ -3,85 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | Profile</title>
+    <title>Affan | Professional Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg: #f0f2f5; --text: #333; --card: white; --header: #1a1a3a; }
-        .dark-mode { --bg: #121212; --text: #e0e0e0; --card: #1e1e1e; --header: #000000; }
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
+
+        :root { 
+            --bg: #1a1a3a; 
+            --text: #ffffff; 
+            --card: rgba(255, 255, 255, 0.1); 
+            --accent: #0088cc; 
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
         
-        .top-section { background: var(--header); color: white; padding: 60px 20px 80px; text-align: center; position: relative; }
-        
-        .mode-toggle { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; }
-
-        .profile-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px; }
-        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid white; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        
-        .main-btn { 
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 12px; 
-            background: #0088cc; 
-            color: white; 
-            padding: 15px 30px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            text-align: center;
         }
-        .main-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,136,204,0.4); }
 
-        .container { max-width: 800px; margin: -40px auto 40px; padding: 0 20px; }
-        .card { background: var(--card); padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        footer { background: var(--header); color: white; text-align: center; padding: 40px 20px; font-size: 14px; }
+        p, .subtitle, .copyright, .info-text {
+            font-family: 'Courier Prime', monospace; 
+            letter-spacing: 0.5px;
+        }
+        
+        .top-section { padding: 60px 20px 40px; }
+
+        .profile-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .profile-img { 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 5px solid rgba(255,255,255,0.2); object-fit: cover; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+        }
+        
+        h1 { font-size: 3rem; font-weight: 600; margin-bottom: 5px; letter-spacing: 2px; }
+        .subtitle { font-size: 1.1rem; opacity: 0.8; margin-bottom: 25px; }
+
+        .main-btn { 
+            display: inline-flex; align-items: center; gap: 12px; 
+            background: #0088cc; color: white !important; 
+            padding: 14px 35px; border-radius: 50px; text-decoration: none; 
+            font-weight: 600; font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
+            margin-bottom: 15px;
+        }
+        .main-btn i { color: white !important; }
+        .main-btn:hover { background: #0077b5; transform: translateY(-3px); }
+
+        /* Style for the new Info section */
+        .info-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
+        .card { 
+            background: var(--card); 
+            padding: 35px; border-radius: 20px; 
+            margin-bottom: 25px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+        }
+        
+        h2 { color: #00aaff; margin-bottom: 15px; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        
+        footer { padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .copyright { font-size: 0.85rem; opacity: 0.6; margin-top: 15px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div class="top-section">
-        <button class="mode-toggle" onclick="toggleMode()">🌙 Dark Mode</button>
         <div class="profile-container">
             <img src="me.png" alt="Affan" class="profile-img">
             <div class="profile-info">
-                <h1>Affan</h1>
-                <p>Student & Aspiring Developer</p>
+                <h1>AFFAN</h1>
+                <p class="subtitle">Student & Aspiring Developer</p>
+            </div>
+            
+            <a href="https://t.me/affan_4" class="main-btn">
+                <i class="fab fa-telegram"></i> CONTACT ME ON TELEGRAM
+            </a>
+
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <span class="info-text">info</span>
             </div>
         </div>
-        <a href="https://t.me/affan_4" class="main-btn">
-            <i class="fab fa-telegram"></i> Telegram
-        </a>
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>My Vision</h2>
+            <h2><i class="fas fa-bullseye"></i> MY VISION</h2>
             <p>I am currently learning how to build the internet of tomorrow. I believe in continuous growth and the power of technology to change lives.</p>
         </div>
         <div class="card">
-            <h2>About Me</h2>
+            <h2><i class="fas fa-user"></i> ABOUT ME</h2>
             <p>Hi, I’m Affan. I built this site to share what I’m learning, working on, and thinking about.</p>
         </div>
     </div>
 
     <footer>
-        <p>Built with ❤️ by Affan</p>
-        <p style="margin-top: 10px; opacity: 0.7;">© 2026. All Rights Reserved.</p>
+        <p>Built with <i class="fas fa-heart" style="color: #e74c3c;"></i> by Affan</p>
+        <p class="copyright">© 2026 AFFAN. ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <script>
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            const btn = document.querySelector('.mode-toggle');
-            if(document.body.classList.contains('dark-mode')) {
-                btn.innerHTML = "☀️ Light Mode";
-            } else {
-                btn.innerHTML = "🌙 Dark Mode";
-            }
-        }
-    </script>
 </body>
 </html>
