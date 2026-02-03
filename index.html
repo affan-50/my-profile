@@ -3,160 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affan | Professional Profile</title>
+    <title>Affan | Pro Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=Poppins:wght@300;400;600&display=swap');
 
         :root { 
-            --bg: #1a1a3a; 
+            --bg: #1a1a3a; /* Deep blue background */
             --text: #ffffff; 
             --card: rgba(255, 255, 255, 0.1); 
-            --accent: #0088cc; 
+            /* Gradient colors from your image */
+            --gradient: linear-gradient(90deg, #0d4b5f 0%, #00c853 100%);
+            --accent-green: #00c853; 
+            --sidebar-bg: #0d0d26;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
-        
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6; 
-            text-align: center;
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        /* --- SIDEBAR --- */
+        .menu-btn {
+            position: fixed; top: 20px; left: 20px;
+            font-size: 24px; color: var(--accent-green); /* Using your green */
+            cursor: pointer; z-index: 1001;
+            background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;
         }
 
-        p, .subtitle, .copyright, .info-text, .tooltip-text {
-            font-family: 'Courier Prime', monospace; 
-            letter-spacing: 0.5px;
+        .sidebar {
+            position: fixed; top: 0; left: -250px; width: 250px; height: 100%;
+            background: var(--sidebar-bg); padding-top: 80px; transition: 0.5s; z-index: 1000;
         }
-        
-        .top-section { padding: 60px 20px 40px; }
 
-        .profile-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .profile-img { 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 5px solid rgba(255,255,255,0.2); object-fit: cover; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+        .sidebar a {
+            padding: 15px 25px; text-decoration: none; font-size: 16px;
+            color: #e0e0e0; display: block; font-family: 'Poppins', sans-serif;
         }
-        
-        h1 { font-size: 3rem; font-weight: 600; margin-bottom: 5px; letter-spacing: 2px; }
-        .subtitle { font-size: 1.1rem; opacity: 0.8; margin-bottom: 25px; }
 
+        /* Sidebar Icons Color */
+        .sidebar a i { margin-right: 15px; color: var(--accent-green); }
+        .sidebar a:hover { background: rgba(255,255,255,0.05); color: white; }
+
+        /* --- BUTTONS (Using the Image Gradient) --- */
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin: 25px 0; }
+        
         .main-btn { 
             display: inline-flex; align-items: center; gap: 12px; 
-            background: #0088cc; color: white !important; 
-            padding: 14px 35px; border-radius: 50px; text-decoration: none; 
-            font-weight: 600; font-family: 'Poppins', sans-serif;
-            box-shadow: 0 4px 15px rgba(0,136,204,0.3);
-            margin-bottom: 10px;
+            background: var(--gradient); /* Exact gradient from image */
+            color: white !important; padding: 14px 32px; border-radius: 50px; 
+            text-decoration: none; font-weight: 600; font-size: 16px;
+            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.3);
         }
-        .main-btn i { color: white !important; }
-        .main-btn:hover { background: #0077b5; transform: translateY(-3px); }
+        .main-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4); }
 
-        /* Enhanced Tooltip Container */
-        .info-box {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            margin-top: 5px;
-            color: rgba(255, 255, 255, 0.7);
+        /* --- PROFILE & CONTENT --- */
+        .top-section { padding: 80px 20px 40px; text-align: center; }
+        .profile-img { 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 5px solid rgba(255,255,255,0.1); margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .info-box .tooltip-text {
-            visibility: hidden;
-            width: 240px;
-            background-color: #00aaff;
-            color: #fff;
-            text-align: left; /* Changed to left for a list-like feel */
-            border-radius: 12px;
-            padding: 15px;
-            position: absolute;
-            z-index: 10;
-            bottom: 160%;
-            left: 50%;
-            margin-left: -120px;
-            opacity: 0;
-            transition: opacity 0.4s;
-            font-size: 0.8rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            line-height: 1.4;
-        }
-
-        .info-box .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -8px;
-            border-width: 8px;
-            border-style: solid;
-            border-color: #00aaff transparent transparent transparent;
-        }
-
-        .info-box:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
+        h1 { font-size: 2.8rem; letter-spacing: 2px; }
+        .subtitle { font-family: 'Courier Prime', monospace; opacity: 0.8; margin-bottom: 20px; }
 
         .container { max-width: 700px; margin: 0 auto 60px; padding: 0 20px; }
         .card { 
-            background: var(--card); 
-            padding: 35px; border-radius: 20px; 
-            margin-bottom: 25px; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            background: var(--card); padding: 35px; border-radius: 20px; 
+            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); 
+            backdrop-filter: blur(10px); text-align: left;
         }
         
-        h2 { color: #00aaff; margin-bottom: 15px; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
-        
-        footer { padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .copyright { font-size: 0.85rem; opacity: 0.6; margin-top: 15px; text-transform: uppercase; }
+        /* Card Title Icons */
+        h2 { color: var(--accent-green); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        p { font-family: 'Courier Prime', monospace; }
+
+        /* Info Tooltip */
+        .info-box { color: var(--accent-green); cursor: pointer; margin-top: 10px; display: inline-block; }
+        .info-text { font-family: 'Courier Prime', monospace; margin-left: 5px; color: white; opacity: 0.7; }
+
+        footer { padding: 40px; opacity: 0.5; font-size: 12px; font-family: 'Courier Prime', monospace; }
     </style>
 </head>
 <body>
 
-    <div class="top-section">
-        <div class="profile-container">
-            <img src="me.png" alt="Affan" class="profile-img">
-            <div class="profile-info">
-                <h1>AFFAN</h1>
-                <p class="subtitle">Student & Aspiring Developer</p>
-            </div>
-            
-            <a href="https://t.me/affan_4" class="main-btn">
-                <i class="fab fa-telegram"></i> CONTACT ME ON TELEGRAM
-            </a>
+    <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
 
-            <div class="info-box">
-                <i class="fas fa-info-circle"></i>
-                <span class="info-text">info</span>
-                <span class="tooltip-text">
-                    📍 Location: Addis Ababa, Ethiopia <br><br>
-                    🚀 Focus: Web Development & UI Design <br><br>
-                    💬 Chat: Feel free to reach out for collabs!
-                </span>
-            </div>
+    <div class="sidebar" id="sidebar">
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-user"></i> Profile</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+    </div>
+
+    <div class="top-section">
+        <img src="me.png" alt="Affan" class="profile-img">
+        <h1>AFFAN</h1>
+        <p class="subtitle">Student & Aspiring Developer</p>
+        
+        <div class="btn-group">
+            <a href="https://t.me/affan_4" class="main-btn">
+                <i class="fab fa-telegram"></i> CONTACT ME
+            </a>
+            <a href="#about" class="main-btn">
+                <i class="fas fa-code"></i> MY PROJECTS
+            </a>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-info-circle"></i> <span class="info-text">info</span>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="about">
         <div class="card">
             <h2><i class="fas fa-bullseye"></i> MY VISION</h2>
-            <p>I am currently learning how to build the internet of tomorrow. I believe in continuous growth and the power of technology to change lives.</p>
-        </div>
-        <div class="card">
-            <h2><i class="fas fa-user"></i> ABOUT ME</h2>
-            <p>Hi, I’m Affan. I built this site to share what I’m learning, working on, and thinking about.</p>
+            <p>I am building the digital tools of the future by mastering web technologies today.</p>
         </div>
     </div>
 
     <footer>
-        <p>Built with <i class="fas fa-heart" style="color: #e74c3c;"></i> by Affan</p>
-        <p class="copyright">© 2026 AFFAN. ALL RIGHTS RESERVED.</p>
+        <p>© 2026 AFFAN. ALL RIGHTS RESERVED.</p>
     </footer>
 
+    <script>
+        function toggleSidebar() {
+            var s = document.getElementById("sidebar");
+            s.style.left = s.style.left === "0px" ? "-250px" : "0px";
+        }
+        // Auto-close sidebar
+        document.addEventListener('click', function(e) {
+            var s = document.getElementById("sidebar");
+            var m = document.querySelector('.menu-btn');
+            if (!s.contains(e.target) && !m.contains(e.target)) s.style.left = "-250px";
+        });
+    </script>
 </body>
 </html>
